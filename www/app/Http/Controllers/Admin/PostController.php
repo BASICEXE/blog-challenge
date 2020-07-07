@@ -16,9 +16,9 @@ class PostController extends Controller
   }
 
   public function index() {
-    $posts = posts::all();
+    $posts = posts::paginate(20);
 
-    return view('admin.post.index',compact('posts'));
+    return view('admin.post.index', ['posts'=> $posts] );
   }
 
   public function create()

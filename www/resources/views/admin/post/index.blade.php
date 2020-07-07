@@ -42,6 +42,9 @@
           @endforeach
         </tbody>
       </table>
+      <div class="mx-auto">
+        {{ $posts->links() }}
+      </div>
 
     </div>
   </div>
