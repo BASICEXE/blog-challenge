@@ -78,7 +78,7 @@
             <div class="bg-secondary">
               <ul class="list-group ">
                 <li class="list-group-item">
-                  <a href="{{ route('posts.index') }}">投稿</a>
+                  <a href="{{ route('posts.index') }}">投稿一覧</a>
                 </li>
               </ul>
             </div>
