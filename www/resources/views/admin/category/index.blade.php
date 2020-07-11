@@ -4,9 +4,9 @@
   <div class="card">
     <div class="card-header">
       <div class="d-flex bd-highlight">
-        <div class="p-2 flex-grow-1">投稿一覧</div>
+        <div class="p-2 flex-grow-1">カテゴリー一覧</div>
         <div class="p-2 bd-highlight">
-          <a class="" href="{{ route('posts.create') }}">新規作成</a>
+          <a class="" href="{{ route('category.create') }}">新規作成</a>
         </div>
       </div>
     </div>
@@ -16,25 +16,27 @@
         <thead>
           <tr>
             <th scope="col">id</th>
-            <th scope="col">title</th>
-            <th scope="col">カテゴリー</th>
+            <th scope="col">slug</th>
+            <th scope="col">名前</th>
+            <th scope="col">要約</th>
             <th scope="col">更新</th>
             <th scope="col">削除</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($posts as $item)
+          @foreach ($categorys as $item)
             <tr>
-              <th scope="row">{{ $item->id }}</th>
-              <td>{{ $item->title }}</td>
-              <td>{{ optional($item->category)->name }}</td>
+              <th scope="row">{{ $item['id'] }}</th>
+              <td>{{ $item['slug'] }}</td>
+              <td>{{ $item['name'] }}</td>
+              <td>{{ $item['description'] }}</td>
               <td>
-                {{ Form::open(['method' => 'get', 'route' => ['posts.edit', $item['id'] ]]) }}
+                {{ Form::open(['method' => 'get', 'route' => ['category.edit', $item['id'] ]]) }}
                 {{ Form::submit('更新', ['class'=> 'btn text-primary']) }}
                 {{ Form::close() }}
               </td>
               <td>
-                {{ Form::open(['method' => 'DELETE', 'route' => ['posts.destroy', $item['id'] ]]) }}
+                {{ Form::open(['method' => 'DELETE', 'route' => ['category.destroy', $item['id'] ]]) }}
                 {{ Form::submit('削除', ['class'=> 'btn text-danger']) }}
                 {{ Form::close() }}
               </td>
@@ -43,7 +45,7 @@
         </tbody>
       </table>
       <div class="mx-auto">
-        {{ $posts->links() }}
+        {{ $categorys->links() }}
       </div>
 
     </div>

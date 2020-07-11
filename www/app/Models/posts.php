@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class posts extends Model
 {
   protected $fillable = [
-    'slug_id',
+    'category_id',
     'title',
     'body',
     'user_id',
@@ -15,6 +15,10 @@ class posts extends Model
 
   public function user() {
     return $this->belongsTo('App\User');
+  }
+
+  public function category() {
+    return $this->belongsTo('App\Models\category');
   }
 
 }

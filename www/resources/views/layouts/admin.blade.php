@@ -55,6 +55,8 @@
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('posts.index') }}">投稿一覧</a>
+                    <a class="dropdown-item" href="{{ route('category.index') }}">カテゴリー一覧</a>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                                              onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
@@ -79,6 +81,9 @@
               <ul class="list-group ">
                 <li class="list-group-item">
                   <a href="{{ route('posts.index') }}">投稿一覧</a>
+                </li>
+                <li class="list-group-item">
+                  <a href="{{ route('category.index') }}">カテゴリー一覧</a>
                 </li>
               </ul>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\category;
 use App\Services\PostService;
 use Illuminate\Http\Request;
 use App\Models\posts;
@@ -18,21 +19,21 @@ class PostController extends Controller
   public function index() {
     $posts = posts::paginate(20);
 
-    return view('admin.post.index', ['posts'=> $posts] );
+    return view('admin.post.index', compact('posts') );
   }
 
   public function create()
   {
     $post = new posts();
-
-    return view('admin.post.create',compact('post'));
+    $categorys = category::all()->pluck('name','id')->prepend('なし', '');
+    return view('admin.post.create',compact('post','categorys'));
   }
 
   public function store(Request $request)
   {
     $data = $request->all();
-    $data['slug_id'] = 1;
-    $data['user_id'] = 1;
+    // $data['slug_id'] = 1;
+    $data['user_id'] = Auth::id();
     $result = posts::create($data);
 
     return redirect('admin/posts/');
@@ -40,20 +41,21 @@ class PostController extends Controller
 
   public function show($id)
   {
-    $user = Auth::find($id);
-    return view('admin.post.single', compact('user'));
+    return redirect('admin/posts');
   }
 
   public function edit($id)
   {
     $post = posts::find($id);
-    return view('admin.post.update', compact('post'));
+    $categorys = category::all()->pluck('name','id')->prepend('なし', '');
+    return view('admin.post.update', compact('post','categorys'));
   }
 
   public function update(Request $request, $id)
   {
     $post = posts::find($id);
     $post->title = $request->title;
+    $post->category_id = $request->category_id;
     $post->body = $request->body;
     $post->save();
 
