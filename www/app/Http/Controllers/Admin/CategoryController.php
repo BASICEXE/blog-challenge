@@ -1,7 +1,7 @@
 <?php
+namespace App\Http\Controllers\Admin;
 
-namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Models\category;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,7 @@ class CategoryController extends Controller
   {
     $categorys = category::paginate(20);
 
-    return view('admin.category.index', $categorys);
+    return view('admin.category.index', compact('categorys'));
   }
 
   /**
@@ -28,7 +28,7 @@ class CategoryController extends Controller
   {
     $category = new category();
 
-    return view('admin.category.create', compact('catgory'));
+    return view('admin.category.create', compact('category'));
   }
 
   /**
@@ -39,7 +39,9 @@ class CategoryController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $data = $request->all();
+    $result = category::create($data);
+    return redirect('admin/category/');
   }
 
   /**
@@ -50,7 +52,7 @@ class CategoryController extends Controller
    */
   public function show(category $category)
   {
-    //
+    return redirect('admin/category');
   }
 
   /**
@@ -61,7 +63,7 @@ class CategoryController extends Controller
    */
   public function edit(category $category)
   {
-    //
+    return view('admin.category.update', compact('category'));
   }
 
   /**
@@ -73,7 +75,12 @@ class CategoryController extends Controller
    */
   public function update(Request $request, category $category)
   {
-    //
+    $category->slug = $request->slug;
+    $category->name = $request->name;
+    $category->description = $request->description;
+    $category->save();
+
+    return redirect('admin/category');
   }
 
   /**
@@ -84,6 +91,7 @@ class CategoryController extends Controller
    */
   public function destroy(category $category)
   {
-    //
+    $category->delete();
+    return redirect('admin/category');
   }
 }
