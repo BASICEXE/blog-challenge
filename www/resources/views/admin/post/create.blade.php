@@ -21,6 +21,13 @@
       </div>
       {{ Form::submit('保存', ['class'=> 'btn btn-primary']) }}
       {{ Form::close() }}
+      @if ($errors->any())
+        <ul class="list-group mt-4">
+          @foreach ($errors->all() as $error)
+            <li class="list-group-item list-group-item-danger">{{ $error }}</li>
+          @endforeach
+        </ul>
+      @endif
     </div>
   </div>
 @endsection

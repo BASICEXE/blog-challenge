@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategory;
 use App\Models\category;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,7 @@ class CategoryController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store(StoreCategory $request)
   {
     $data = $request->all();
     $result = category::create($data);
@@ -73,7 +74,7 @@ class CategoryController extends Controller
    * @param  \App\Models\category  $category
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, category $category)
+  public function update(StoreCategory $request, category $category)
   {
     $category->slug = $request->slug;
     $category->name = $request->name;

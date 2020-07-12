@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePost;
 use App\Models\category;
 use App\Services\PostService;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class PostController extends Controller
     return view('admin.post.create',compact('post','categorys'));
   }
 
-  public function store(Request $request)
+  public function store(StorePost $request)
   {
     $data = $request->all();
     // $data['slug_id'] = 1;
@@ -51,7 +52,7 @@ class PostController extends Controller
     return view('admin.post.update', compact('post','categorys'));
   }
 
-  public function update(Request $request, $id)
+  public function update(StorePost $request, $id)
   {
     $post = posts::find($id);
     $post->title = $request->title;
