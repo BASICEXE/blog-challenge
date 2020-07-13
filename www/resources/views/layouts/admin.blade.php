@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    @yield('phpToJs')
     <script src="{{ mix('js/app.js') }}" defer></script>
 
     <!-- Fonts -->

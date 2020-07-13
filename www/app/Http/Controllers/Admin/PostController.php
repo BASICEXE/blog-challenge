@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePost;
 use App\Models\category;
-use App\Services\PostService;
 use Illuminate\Http\Request;
 use App\Models\posts;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +26,19 @@ class PostController extends Controller
   {
     $post = new posts();
     $categorys = category::all()->pluck('name','id')->prepend('なし', '');
-    return view('admin.post.create',compact('post','categorys'));
+
+    // if (! $token = auth("api")) {
+      // return response()->json(['error' => 'Unauthorized'], 401);
+    // }
+    $php = app()->make('phpToJs');
+    $user_id = Auth::id();
+    $token = User::find($user_id)->getJWTIdentifier();
+    $data = [
+      'hoge' => $token
+    ];
+    $phpToJs = $php->convert($data);
+    
+    return view('admin.post.create',compact('post','categorys', 'phpToJs'));
   }
 
   public function store(StorePost $request)
@@ -49,7 +60,12 @@ class PostController extends Controller
   {
     $post = posts::find($id);
     $categorys = category::all()->pluck('name','id')->prepend('なし', '');
-    return view('admin.post.update', compact('post','categorys'));
+    $php = app()->make('phpToJs');
+    $data = [
+
+    ];
+    $phpToJs = $php->convert($data);
+    return view('admin.post.update', compact('post','categorys', 'phpToJs'));
   }
 
   public function update(StorePost $request, $id)

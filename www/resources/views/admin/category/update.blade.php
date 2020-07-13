@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@include('common.phpToJs')
+
 @section('content')
   <div class="card">
     <div class="card-header">新規カテゴリー</div>
