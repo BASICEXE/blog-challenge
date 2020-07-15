@@ -14,5 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->namespace('Api')->group(function() {
-  Route::post('/fileupload','FileuploadController@upload');
+  // Route::post('/fileupload','FileuploadController@upload');
 });

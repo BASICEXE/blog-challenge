@@ -27,14 +27,10 @@ class PostController extends Controller
     $post = new posts();
     $categorys = category::all()->pluck('name','id')->prepend('なし', '');
 
-    // if (! $token = auth("api")) {
-      // return response()->json(['error' => 'Unauthorized'], 401);
-    // }
     $php = app()->make('phpToJs');
-    $user_id = Auth::id();
-    $token = User::find($user_id)->getJWTIdentifier();
+    session(['file_upload_token'=>'hogehoge']);
     $data = [
-      'hoge' => $token
+      'token' => 'hogehoge'
     ];
     $phpToJs = $php->convert($data);
     
