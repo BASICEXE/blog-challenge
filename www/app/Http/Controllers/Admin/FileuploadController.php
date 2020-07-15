@@ -20,8 +20,18 @@ class FileuploadController extends Controller
         'message' => 'error no token'
       ]]);
     } else {
-      $path = $request->file('upload')->storeAs('/public', 'hoge.jpg', 'public');
-      $data = $data->merge(['uploaded'=> true, 'url' => \Storage::url($path)]);
+
+      //バリデーションされているファイルは (jpeg, png, bmp, gif, or svg)
+      //3Mb以下のファイル
+      $validation = \Validator::make($request->all(), ['upload' => 'image|max:30000']);
+
+      // バリデーションチェックを行う
+      if (!$validation->fails()) {
+        $fileName = $request->file('upload')->getClientOriginalName();
+        $savePath = 'public/'.Auth::id();
+        $path = $request->file('upload')->storeAs($savePath, $fileName, ['public']);
+        $data = $data->merge(['uploaded'=> true, 'url' => \Storage::url($path)]);
+      }
     }
 
     // 配列で返すとHeader付きjsonになる
