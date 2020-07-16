@@ -26,7 +26,7 @@ services:
     container_name: laravel_database 
     environment: 
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: database
+      MYSQL_DATABASE: laravel_data
       MYSQL_USER: docker
       MYSQL_PASSWORD: docker
       TZ: 'Asia/Tokyo'
@@ -36,6 +36,6 @@ services:
       # - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
       # - ./docker/db/sql:/docker-entrypoint-initdb.d
     ports:
-      - 3306:3306
+      - 13306:3306
 
 
