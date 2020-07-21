@@ -11,7 +11,7 @@
           <div class="card-text">
             {!! str_limit($post->body, 20) !!}
           </div>
-          <a class="ml-auto d-inline-block" href="{{ route('page', $post->id) }}">詳細へ</a>
+          <a class="ml-auto d-inline-block" href="{{ url('post', ['catgory' => $post->category,'id' => $post->id]) }}">詳細へ</a>
         </div>
       </div>
     @endforeach

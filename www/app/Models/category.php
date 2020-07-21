@@ -12,6 +12,10 @@ class category extends Model
     'description',
   ];
 
+  public function getRouteKeyName() {
+    return 'slug';
+  }
+
   public function post() {
     return $this->hasMany('App\Models\posts');
   }

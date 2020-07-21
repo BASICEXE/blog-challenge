@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/post/{id}', 'HomeController@page')->name('page');
+Route::get('/post/{category}/{id}', 'HomeController@page')->name('page');
 
 Auth::routes();
 
