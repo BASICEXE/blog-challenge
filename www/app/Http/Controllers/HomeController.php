@@ -29,7 +29,7 @@ class HomeController extends Controller
     return view('home', ['posts'=> $posts]);
   }
 
-  public function page($id) {
+  public function page($category, $id) {
     $post = posts::find($id);
     return view('page', compact('post'));
 
