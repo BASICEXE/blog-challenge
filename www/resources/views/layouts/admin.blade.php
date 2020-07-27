@@ -86,6 +86,9 @@
                 <li class="list-group-item">
                   <a href="{{ route('category.index') }}">カテゴリー一覧</a>
                 </li>
+                <li class="list-group-item">
+                  <a href="{{ route('tag.index') }}">タグ一覧</a>
+                </li>
               </ul>
             </div>
           </div>
