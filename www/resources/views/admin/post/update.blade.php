@@ -16,6 +16,17 @@
         {{Form::select('category_id', $categorys, old('category_id', $post->category_id), ['id' => 'post_category','class'=> 'form-control'] )}}
       </div>
       <div class="form-group">
+        <label for="post_tag">タグ</label>
+        <div class="btn-group-toggle" data-toggle="buttons">
+          @foreach($tags as $tag)
+          <label class="btn btn-outline-dark btn-sm">
+            {{Form::checkbox('tags[]', $tag->id, null, ['class' => 'form-check-input', 'id' => $tag->slug])}}
+            {{ $tag->name }}
+          </label>
+          @endforeach
+        </div>
+      </div>
+      <div class="form-group">
         <label for="post_body">記事内容</label>
         {{ Form::textarea('body', old('body', $post->body), ['id' => 'post_body','class'=> 'form-control admin-editer'])  }}
       </div>
