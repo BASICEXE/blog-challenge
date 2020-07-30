@@ -31,12 +31,12 @@
               <td>{{ $item['name'] }}</td>
               <td>{{ $item['description'] }}</td>
               <td>
-                {{ Form::open(['method' => 'get', 'route' => ['category.edit', $item['id'] ]]) }}
+                {{ Form::open(['method' => 'get', 'route' => ['category.edit', $item ]]) }}
                 {{ Form::submit('更新', ['class'=> 'btn text-primary']) }}
                 {{ Form::close() }}
               </td>
               <td>
-                {{ Form::open(['method' => 'DELETE', 'route' => ['category.destroy', $item['id'] ]]) }}
+                {{ Form::open(['method' => 'DELETE', 'route' => ['category.destroy', $item ]]) }}
                 {{ Form::submit('削除', ['class'=> 'btn text-danger']) }}
                 {{ Form::close() }}
               </td>
