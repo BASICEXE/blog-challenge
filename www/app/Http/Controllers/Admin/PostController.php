@@ -73,9 +73,8 @@ class PostController extends Controller
     $post->title = $request->title;
     $post->category_id = $request->category_id;
     $post->body = $request->body;
-    $post->tags()->attach($tags);
+    $post->tags()->sync($tags);
     $post->save();
-    dd($post);
 
     return redirect('admin/posts/');
   }

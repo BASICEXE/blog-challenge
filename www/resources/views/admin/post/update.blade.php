@@ -20,7 +20,7 @@
         <div class="btn-group-toggle" data-toggle="buttons">
           @foreach($tags as $tag)
           <label class="btn btn-outline-dark btn-sm">
-            {{Form::checkbox('tags[]', $tag->id, null, ['class' => 'form-check-input', 'id' => $tag->slug])}}
+            {{Form::checkbox('tags[]', $tag->id, in_array($tag->id, $post->tag_ids ,true) , ['class' => 'form-check-input', 'id' => $tag->slug])}}
             {{ $tag->name }}
           </label>
           @endforeach

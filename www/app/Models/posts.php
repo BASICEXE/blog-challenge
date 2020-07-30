@@ -25,5 +25,15 @@ class posts extends Model
     return $this->belongsToMany(tag::class, 'post_tag', 'post_id', 'tag_id');
   }
 
+  /**
+   * getTagIds // 紐づくタグのIDを返す
+   * 
+   * @access public
+   * @return array // ['id']
+   */
+  public function getTagIdsAttribute() {
+    return $this->tags->pluck(['id'])->toArray();
+  }
+
 }
 
