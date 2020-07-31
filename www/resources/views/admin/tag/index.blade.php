@@ -6,7 +6,7 @@
       <div class="d-flex bd-highlight">
         <div class="p-2 flex-grow-1">カテゴリー一覧</div>
         <div class="p-2 bd-highlight">
-          <a class="" href="{{ route('category.create') }}">新規作成</a>
+          <a class="" href="{{ route('tag.create') }}">新規作成</a>
         </div>
       </div>
     </div>
@@ -24,19 +24,19 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($categorys as $item)
+          @foreach ($tags as $item)
             <tr>
               <th scope="row">{{ $item['id'] }}</th>
               <td>{{ $item['slug'] }}</td>
               <td>{{ $item['name'] }}</td>
               <td>{{ $item['description'] }}</td>
               <td>
-                {{ Form::open(['method' => 'get', 'route' => ['category.edit', $item ]]) }}
+                {{ Form::open(['method' => 'get', 'route' => ['tag.edit', $item['id'] ]]) }}
                 {{ Form::submit('更新', ['class'=> 'btn text-primary']) }}
                 {{ Form::close() }}
               </td>
               <td>
-                {{ Form::open(['method' => 'DELETE', 'route' => ['category.destroy', $item ]]) }}
+                {{ Form::open(['method' => 'DELETE', 'route' => ['tag.destroy', $item['id'] ]]) }}
                 {{ Form::submit('削除', ['class'=> 'btn text-danger']) }}
                 {{ Form::close() }}
               </td>
@@ -45,7 +45,7 @@
         </tbody>
       </table>
       <div class="mx-auto">
-        {{ $categorys->links() }}
+        {{ $tags->links() }}
       </div>
 
     </div>
