@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@include('common.ogp')
+
 @section('content')
   <div class="container">
     @foreach($posts as $post)
