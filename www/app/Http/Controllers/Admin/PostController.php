@@ -68,11 +68,12 @@ class PostController extends Controller
 
   public function update(StorePost $request, $id)
   {
-    $tags = $request->input('tags');
-    $post = posts::find($id);
-    $post->title = $request->title;
+    $tags              = $request->input('tags');
+    $post              = posts::find($id);
+    $post->title       = $request->title;
     $post->category_id = $request->category_id;
-    $post->body = $request->body;
+    $post->body        = $request->body;
+    $post->description = $request->description;
     $post->tags()->sync($tags);
     $post->save();
 

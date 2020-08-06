@@ -27,6 +27,10 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="post_description">要約</label>
+        {{ Form::textarea('description', old('description', $post->description), ['id' => 'post_description','class'=> 'form-control post_description'])  }}
+      </div>
+      <div class="form-group">
         <label for="post_body">記事内容</label>
         {{ Form::textarea('body', old('body', $post->body), ['id' => 'post_body','class'=> 'form-control admin-editer'])  }}
       </div>

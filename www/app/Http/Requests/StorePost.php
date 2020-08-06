@@ -24,9 +24,10 @@ class StorePost extends FormRequest
   public function rules()
   {
     return [
-      'title' => 'required',
+      'title'       => 'required',
       'category_id' => 'numeric',
-      'body' => 'present',
+      'body'        => 'present',
+      'discretion'  => 'max:250',
     ];
   }
 

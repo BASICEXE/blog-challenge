@@ -10,6 +10,7 @@ class posts extends Model
     'category_id',
     'title',
     'body',
+    'description',
     'user_id',
   ];
 
@@ -33,6 +34,20 @@ class posts extends Model
    */
   public function getTagIdsAttribute() {
     return $this->tags->pluck(['id'])->toArray();
+  }
+
+  /**
+   * getSummaryAttribute // 要約を表示 タグなし description or body
+   * 
+   * @access public
+   * @return string
+   */
+  public function getSummaryAttribute(){
+    $result = $this->description;
+    if($this->description == '') {
+      $result = $this->body;
+    }
+    return str_limit( strip_tags($result), 150 );
   }
 
 }
