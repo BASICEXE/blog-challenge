@@ -19,7 +19,7 @@
             @endforeach
           </div>
           <div class="card-text">
-            {!! str_limit($post->body, 20) !!}
+            {!! $post->summary !!}
           </div>
           <a class="ml-auto d-inline-block" href="{{ url('post', ['catgory' => $post->category,'id' => $post->id]) }}">詳細へ</a>
         </div>

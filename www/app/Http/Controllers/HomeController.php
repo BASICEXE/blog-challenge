@@ -36,9 +36,9 @@ class HomeController extends Controller
 
   public function page($category, $id) {
     $post = posts::find($id);
-    $this->ogp->add('og:url', URL::current());
-    $this->ogp->add('og:title', $post->title);
-    $this->ogp->add('og:description', str_limit(strip_tags($post->body, 150)));
+    $this->ogp->add('og:url', URL::current() );
+    $this->ogp->add('og:title', $post->title );
+    $this->ogp->add('og:description', $post->summary );
     // $this->ogp->add('og:image', $post->image->url);
     $ogp = $this->ogp->get();
     return view('page', compact('post', 'ogp'));
