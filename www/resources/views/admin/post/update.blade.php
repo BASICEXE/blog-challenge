@@ -26,6 +26,8 @@
           @endforeach
         </div>
       </div>
+      <example-component></example-component>
+
       <div class="form-group">
         <label for="post_description">要約</label>
         {{ Form::textarea('description', old('description', $post->description), ['id' => 'post_description','class'=> 'form-control post_description'])  }}
