@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class FileuploadController extends Controller
 {
-  public function upload(Request $request) {
+  public function upload(Request $request, ImageService $imageService) {
     // 基本のResponseを作成
     $data = collect([
       'uploaded' => false,
@@ -21,9 +22,10 @@ class FileuploadController extends Controller
     // バリデーションチェックを行う
     if (!$validation->fails()) {
       $fileName = $request->file('upload')->getClientOriginalName();
-      $savePath = 'public/'.Auth::id();
-      $path = $request->file('upload')->storeAs($savePath, $fileName, ['public']);
-      $data = $data->merge(['uploaded'=> true, 'url' => \Storage::url($path)]);
+      $file = $request->file('upload');
+      $url = $imageService->save($fileName, $file);
+
+      $data = $data->merge(['uploaded'=> true, 'url' => $url]);
     }
 
     // 配列で返すとHeader付きjsonになる
