@@ -21,8 +21,8 @@ class FileuploadController extends Controller
 
     // バリデーションチェックを行う
     if (!$validation->fails()) {
-      $fileName = $request->file('upload')->getClientOriginalName();
       $file = $request->file('upload');
+      $fileName = $file->getClientOriginalName();
       $url = $imageService->save($fileName, $file);
 
       $data = $data->merge(['uploaded'=> true, 'url' => $url]);

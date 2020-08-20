@@ -8,6 +8,7 @@ class posts extends Model
 {
   protected $fillable = [
     'category_id',
+    'medelia_id',
     'title',
     'body',
     'description',
