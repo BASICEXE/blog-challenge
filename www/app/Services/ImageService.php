@@ -16,7 +16,7 @@ class ImageService {
    * @param mixed $file // ファイル自体
    * @param string $label // ファイルのラベル altなど
    * @access public
-   * @return url
+   * @return media
    */
   public function save($fileName, $file, $label = null) {
     try {
@@ -24,21 +24,25 @@ class ImageService {
       $savePath = 'public/'.Auth::id(). '/' .now()->format('Y-m-d');
 
       $path = Storage::putFileAs($savePath, $file, $fileName);
-      $url = Storage::url($path);
+      $this->url = Storage::url($path);
       $type = $file->getMimeType();
 
-      media::firstOrCreate(
+      $result = media::firstOrCreate(
         ['name' => $fileName], [
         'type' => $type,
         'label' => $label,
         'path' => $path,
-        'url' => $url,
+        'url' => $this->url,
       ]);
     } catch (Exception $e) {
       Log::error('メディアサービスでエラー'.$e->getMessage());
       throw new Exception($e->getMessage());
     }
-    return $url;
+    return $result;
+  }
+
+  public function getUrl() {
+    return $this->url;
   }
 
 }

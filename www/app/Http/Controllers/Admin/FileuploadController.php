@@ -23,9 +23,10 @@ class FileuploadController extends Controller
     if (!$validation->fails()) {
       $file = $request->file('upload');
       $fileName = $file->getClientOriginalName();
-      $url = $imageService->save($fileName, $file);
+      $media = $imageService->save($fileName, $file);
+      $url = $imageService->getUrl();
 
-      $data = $data->merge(['uploaded'=> true, 'url' => $url]);
+      $data = $data->merge(['uploaded'=> true, 'url' => $url, 'id' => $media->id]);
     }
 
     // 配列で返すとHeader付きjsonになる
