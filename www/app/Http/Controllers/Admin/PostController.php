@@ -72,7 +72,7 @@ class PostController extends Controller
     $post              = posts::find($id);
     $post->title       = $request->title;
     $post->category_id = $request->category_id;
-    $post->medelia_id  = $request->medelia_id;
+    $post->media_id  = $request->media_id;
     $post->body        = $request->body;
     $post->description = $request->description;
     $post->tags()->sync($tags);
