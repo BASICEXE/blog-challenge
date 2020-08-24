@@ -8,7 +8,7 @@ class posts extends Model
 {
   protected $fillable = [
     'category_id',
-    'medelia_id',
+    'media_id',
     'title',
     'body',
     'description',
@@ -25,6 +25,10 @@ class posts extends Model
 
   public function tags() {
     return $this->belongsToMany(tag::class, 'post_tag', 'post_id', 'tag_id');
+  }
+
+  public function media() {
+    return $this->belongsTo('App\Models\media');
   }
 
   /**

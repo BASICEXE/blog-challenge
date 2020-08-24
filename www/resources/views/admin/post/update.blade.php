@@ -26,7 +26,10 @@
           @endforeach
         </div>
       </div>
-      <example-component></example-component>
+      <example-component
+        seturl="{{ $post->media->url }}"
+        setid="{{ $post->media->id }}">
+      </example-component>
 
       <div class="form-group">
         <label for="post_description">要約</label>

@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <div class="form-group">
+    <label for="post_media">アイキャッチ</label>
     <div v-if="!url"
          class="dropArea"
          @dragenter="dragEnter"
@@ -9,7 +10,10 @@
          :class="{ dropArea__enter: isEnter }">
       <span>ドロップエリア</span>
     </div>
-    <img :src="url" v-if="url" alt="">
+    <button v-if="url" @click="close" type="button" class="close border-0" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <img class="d-block" :src="url" v-if="url" alt="">
     <input type="hidden" v-model="imageId" name="media_id">
   </div>
 </template>
@@ -25,7 +29,15 @@ export default {
       imageId: null,
     }
   },
+  props: {
+    seturl: {
+      type: String,
+      default: null,
+    },
+  },
   mounted() {
+    this.url = this.seturl
+    this.imageId = this.setid
   },
   methods: {
     dragEnter() {
@@ -50,6 +62,10 @@ export default {
         }).catch(error => {
           new Error(error)
         });
+    },
+    close() {
+      this.url = null
+      this.imageId = null
     },
   }
 }

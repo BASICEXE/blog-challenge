@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class media extends Model
 {
@@ -24,6 +25,16 @@ class media extends Model
 
   public function post() {
     return $this->belongsTo('App\Models\posts');
+  }
+
+  /**
+   * url // メディアのURLを返す
+   * 
+   * @access public
+   * @return string
+   */
+  public function url() {
+    return Storage::url($this->path);
   }
 
 }
