@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class category extends Model
+class tag extends Model
 {
   protected $fillable = [
     'slug',
@@ -12,13 +12,7 @@ class category extends Model
     'description',
   ];
 
-  public function getRouteKeyName() {
-    return 'slug';
-  }
-
   public function post() {
-    return $this->hasMany('App\Models\posts');
+    return $this->belongsToMany(posts::class, 'post_tag', 'post_id', 'tag_id');
   }
-
 }
-

@@ -5,3 +5,23 @@
 .ck-editor__editable_inline {
     min-height: 400px;
 }
+
+#app .post_description {
+  height: 120px;
+}
+
+.dropArea {
+  border: 1px solid #333;
+  border-radius: 5px;
+  min-height: 100px;
+  width: 100%;
+  margin: 0 auto 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__enter {
+    border-color: #ddd;
+
+  }
+}
+

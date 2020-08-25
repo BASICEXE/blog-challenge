@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePost extends FormRequest
+class StoreTag extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -24,19 +24,17 @@ class StorePost extends FormRequest
   public function rules()
   {
     return [
-      'title'       => 'required',
-      'category_id' => 'numeric',
-      'body'        => 'present',
-      'discretion'  => 'max:250',
+      'slug' => 'required|unique:tags,slug|max:50',
+      'name' => 'required|unique:tags,name|max:50',
+      'description' => 'max:150',
     ];
   }
 
-  public function attributes()
-  {
+  public function attributes() {
     return [
-      'title' => 'タイトル',
-      'category_id' => 'カテゴリー',
-      'body' => '記事内容',
+      'slug' => 'スラッグ',
+      'name' => '表示名',
+      'description' => '要約',
     ];
   }
 }

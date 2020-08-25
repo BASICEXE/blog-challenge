@@ -18,6 +18,7 @@
             <th scope="col">id</th>
             <th scope="col">title</th>
             <th scope="col">カテゴリー</th>
+            <th scope="col">タグ</th>
             <th scope="col">更新</th>
             <th scope="col">削除</th>
           </tr>
@@ -28,6 +29,11 @@
               <th scope="row">{{ $item->id }}</th>
               <td>{{ $item->title }}</td>
               <td>{{ optional($item->category)->name }}</td>
+              <td>
+                @foreach($item->tags as $tag)
+                  {{ $tag->name }},
+                @endforeach
+              </td>
               <td>
                 {{ Form::open(['method' => 'get', 'route' => ['posts.edit', $item['id'] ]]) }}
                 {{ Form::submit('更新', ['class'=> 'btn text-primary']) }}
