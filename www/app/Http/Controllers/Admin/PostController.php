@@ -29,14 +29,14 @@ class PostController extends Controller
     $categorys = category::all()->pluck('name','id')->prepend('なし', '');
     $tags = tag::all();
 
-    $php = app()->make('phpToJs');
-    session(['file_upload_token'=>'hogehoge']);
-    $data = [
-      'token' => 'hogehoge'
-    ];
-    $phpToJs = $php->convert($data);
+    // $php = app()->make('phpToJs');
+    // session(['file_upload_token'=>'hogehoge']);
+    // $data = [
+    //   'token' => 'hogehoge'
+    // ];
+    // $phpToJs = $php->convert($data);
     
-    return view('admin.post.create',compact('post','categorys', 'phpToJs', 'tags'));
+    return view('admin.post.create',compact('post','categorys', 'tags'));
   }
 
   public function store(StorePost $request)
@@ -59,11 +59,11 @@ class PostController extends Controller
     $post = posts::find($id);
     $categorys = category::all()->pluck('name','id')->prepend('なし', '');
     $tags = tag::all();
-    $php = app()->make('phpToJs');
-    $data = [
-    ];
-    $phpToJs = $php->convert($data);
-    return view('admin.post.update', compact('post','categorys', 'phpToJs', 'tags'));
+    // $php = app()->make('phpToJs');
+    // $data = [
+    // ];
+    // $phpToJs = $php->convert($data);
+    return view('admin.post.update', compact('post','categorys', 'tags'));
   }
 
   public function update(StorePost $request, $id)
@@ -72,6 +72,7 @@ class PostController extends Controller
     $post              = posts::find($id);
     $post->title       = $request->title;
     $post->category_id = $request->category_id;
+    $post->media_id  = $request->media_id;
     $post->body        = $request->body;
     $post->description = $request->description;
     $post->tags()->sync($tags);

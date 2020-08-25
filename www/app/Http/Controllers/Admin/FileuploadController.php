@@ -3,35 +3,36 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class FileuploadController extends Controller
 {
-  public function upload(Request $request) {
-    // sessionからTokenを取得
-    $token = session('file_upload_token');
+  public function upload(Request $request, ImageService $imageService) {
     // 基本のResponseを作成
     $data = collect([
       'uploaded' => false,
     ]);
-    if(empty($token)) {
-      $data = $data->merge(['error' => [
-        'message' => 'error no token'
-      ]]);
+
+    //バリデーションされているファイルは (jpeg, png, bmp, gif, or svg)
+    $validation = Validator::make($request->all(), ['upload' => 'image|max:300000']);
+
+    Log::debug('test');
+    Log::debug($validation->errors());
+    // バリデーションチェックを行う
+    if (!$validation->fails()) {
+      $file = $request->file('upload');
+      Log::debug('test');
+      Log::debug($file);
+      $fileName = $file->getClientOriginalName();
+      $media = $imageService->save($fileName, $file);
+      $url = $imageService->getUrl();
+
+      $data = $data->merge(['uploaded'=> true, 'url' => $url, 'id' => $media->id]);
     } else {
-
-      //バリデーションされているファイルは (jpeg, png, bmp, gif, or svg)
-      //3Mb以下のファイル
-      $validation = \Validator::make($request->all(), ['upload' => 'image|max:30000']);
-
-      // バリデーションチェックを行う
-      if (!$validation->fails()) {
-        $fileName = $request->file('upload')->getClientOriginalName();
-        $savePath = 'public/'.Auth::id();
-        $path = $request->file('upload')->storeAs($savePath, $fileName, ['public']);
-        $data = $data->merge(['uploaded'=> true, 'url' => \Storage::url($path)]);
-      }
+      $data = $data->merge(['uploaded'=> false, 'errors' => $validation->errors()]);
     }
 
     // 配列で返すとHeader付きjsonになる

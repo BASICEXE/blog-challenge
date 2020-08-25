@@ -26,6 +26,10 @@
           @endforeach
         </div>
       </div>
+      <eyecatch-component
+        seturl="{{ old('url', $post->media->url) }}"
+        setid="{{ old('media_id', $post->media->id) }}">
+      </eyecatch-component>
       <div class="form-group">
         <label for="post_description">要約</label>
         {{ Form::textarea('description', old('description', $post->description), ['id' => 'post_description','class'=> 'form-control post_description'])  }}
