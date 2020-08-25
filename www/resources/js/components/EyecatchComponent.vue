@@ -14,6 +14,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
     <img class="d-block" :src="url" v-if="url" alt="">
+    <input type="hidden" v-model="url" name="url">
     <input type="hidden" v-model="imageId" name="media_id">
   </div>
 </template>
