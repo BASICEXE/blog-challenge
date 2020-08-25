@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class FileuploadController extends Controller
 {
@@ -17,8 +17,7 @@ class FileuploadController extends Controller
     ]);
 
     //バリデーションされているファイルは (jpeg, png, bmp, gif, or svg)
-    //3Mb以下のファイル
-    $validation = \Validator::make($request->all(), ['upload' => 'image|max:300000']);
+    $validation = Validator::make($request->all(), ['upload' => 'image|max:300000']);
 
     Log::debug('test');
     Log::debug($validation->errors());
@@ -32,6 +31,8 @@ class FileuploadController extends Controller
       $url = $imageService->getUrl();
 
       $data = $data->merge(['uploaded'=> true, 'url' => $url, 'id' => $media->id]);
+    } else {
+      $data = $data->merge(['uploaded'=> false, 'errors' => $validation->errors()]);
     }
 
     // 配列で返すとHeader付きjsonになる
