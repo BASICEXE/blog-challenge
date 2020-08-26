@@ -39,9 +39,7 @@ class HomeController extends Controller
     $this->ogp->add('og:url', URL::current() );
     $this->ogp->add('og:title', $post->title );
     $this->ogp->add('og:description', $post->summary );
-    $url = optional($post->media)->url();
-    $url = is_null($url) ? 'https://placehold.jp/60/bfbfbf/ffffff/640x480.png?text=%E7%94%BB%E5%83%8F%E3%81%AF%E3%81%82%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93' : $url;
-    $this->ogp->add('og:image', $url);
+    $this->ogp->add('og:image', $post->eyecatchUrl());
     $this->ogp->add('twitter:card', 'summary_large_image');
     // $this->ogp->add('twitter:site', '@');
     // $this->ogp->add('fb:app_id', '@');

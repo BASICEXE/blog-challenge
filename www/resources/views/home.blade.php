@@ -10,6 +10,9 @@
           {{ $post->title }}
         </div>
         <div class="card-body">
+          <div class="mb-4">
+            <img class="mw-100" src="{{ $post->eyecatchUrl() }}" alt="">
+          </div>
           <div class="tag-wap border-bottom mb-4">
             <p class="d-inline-block mr-2">タグ一覧</p>
             @foreach($post->tags as $tag)
