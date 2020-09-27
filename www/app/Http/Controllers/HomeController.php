@@ -39,7 +39,10 @@ class HomeController extends Controller
     $this->ogp->add('og:url', URL::current() );
     $this->ogp->add('og:title', $post->title );
     $this->ogp->add('og:description', $post->summary );
-    // $this->ogp->add('og:image', $post->image->url);
+    $this->ogp->add('og:image', $post->eyecatchUrl());
+    $this->ogp->add('twitter:card', 'summary_large_image');
+    // $this->ogp->add('twitter:site', '@');
+    // $this->ogp->add('fb:app_id', '@');
     $ogp = $this->ogp->get();
     return view('page', compact('post', 'ogp'));
   }

@@ -31,6 +31,14 @@ class posts extends Model
     return $this->belongsTo('App\Models\media');
   }
 
+  public function eyecatchUrl(){
+    $item = $this->media;
+    if (is_null($item)) {
+      return 'https://placehold.jp/60/bfbfbf/ffffff/640x480.png?text=%E7%94%BB%E5%83%8F%E3%81%AF%E3%81%82%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93';
+    }
+    return $item->url();
+  }
+
   /**
    * getTagIds // 紐づくタグのIDを返す
    * 
