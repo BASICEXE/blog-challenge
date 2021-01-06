@@ -23,7 +23,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "axios": "^0.19",
+        "axios": "^0.21",
         "@ckeditor/ckeditor5-build-classic": "^20.0.0"
     }
 }
